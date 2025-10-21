@@ -47,9 +47,11 @@ require('dotenv').config()
 // 7) GET /plans/search?q=term
 
 // - Search by title/provider (case-insensitive), return matches
-// 8) GET /stock/summary
 
+// 8) GET /stock/summary
 // - Group stock by planId: [{ planId, ready, sold, error }]    count count by status
+
+
 // ===================== SERVER =====================
 // Middleware to parse JSON bodies
 app.use(express.json());

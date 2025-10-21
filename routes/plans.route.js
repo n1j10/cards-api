@@ -4,6 +4,7 @@ const router = express.Router();
 const planController = require('../controllers/plans.controller');
 const authMiddleware = require("../middleware/auth");
 
+// router.get('/search', searchPlans());
 
 // GET all plans
 router.get("/", (req, res) => {
@@ -13,8 +14,14 @@ router.get("/", (req, res) => {
 
 
 
-
-
+router.get("/search",  (req, res) => {
+ let q = req.query.q;
+   if (!q) {
+    return res.status(400).json({ error: "Missing search query (?q=)" });
+  }
+ let plans = planController.searchPlans(q);
+ res.json(plans);
+});
 
 
 // GET a single plan by ID
@@ -23,6 +30,13 @@ router.get("/:id",  authMiddleware, (req, res) => {
   let plan = planController.getPlanById(id);
   res.json(plan);
 });
+
+
+
+
+
+
+
 
 module.exports = router;
 

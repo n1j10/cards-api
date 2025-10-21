@@ -37,9 +37,25 @@ const getStockByStatus = (req, res) => {
   res.json(filtered);
 };
 
+// 🟢 جلب ملخص الأسهم حسب planId مع عد الحالات
+const getStockSummary = (req, res) => {
+  const summary = stock.reduce((acc, item) => {
+    const { planId, status } = item;
+    if (!acc[planId]) {
+      acc[planId] = { planId, ready: 0, sold: 0, error: 0 };
+    }
+    acc[planId][status]++;
+    return acc;
+  }, {});
+
+  const result = Object.values(summary);
+  res.json(result);
+};
+
 module.exports = {
   getAllstock,
   getStockById,
   getStocktByPlan,
   getStockByStatus,
+  getStockSummary,
 };
