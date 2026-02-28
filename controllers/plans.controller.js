@@ -24,7 +24,6 @@ const searchPlans = (q) => {
 
 
 
-
 const getPlanById = (id) => {
   return plans.find((plan) => plan.id === id);
 };
